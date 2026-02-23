@@ -8,7 +8,7 @@ authors = [
 ]
 version = "1.0.0"
 edition = "2021"
-categories = ["parsing", "uefi"]
+categories = ["parsing"]
 description = "A Rust library for parsing and loading UEFI firmware images"
 documentation = "https://docs.rs/bias-loader-uefi"
 exclude = ["fuzz/", "guids/", "tests/"]
