@@ -65,7 +65,7 @@ fw.for_each_until(|module| {
 });
 ```
 
-### Dependency expressions (DepEx)
+### Dependency expressions
 
 ```rust
 use bias_loader_uefi::depex::DepExOpcode;
