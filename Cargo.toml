@@ -1,8 +1,21 @@
 [package]
 name = "bias-loader-uefi"
+authors = [
+  "Yegor Vasilenko <yegor@binarly.io>",
+  "Sam L. Thomas <sam@binarly.io>",
+  "Fabio Pagani <fabio@binarly.io>",
+  "Claudiu-Vlad Ursache <claudiuv@binarly.io>",
+]
 version = "1.0.0"
 edition = "2021"
-exclude = ["tests/"]
+categories = ["parsing", "uefi"]
+description = "A Rust library for parsing and loading UEFI firmware images"
+documentation = "https://docs.rs/bias-loader-uefi"
+exclude = ["fuzz/", "guids/", "tests/"]
+keywords = ["uefi", "loader", "parsing", "firmware"]
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/binarly-io/bias-loader-uefi"
 
 [features]
 default = []
