@@ -2,7 +2,7 @@
 
 Rust bindings for [UEFITool](https://github.com/binarly-io/bias-uefitool) with additional parsers for [AMI PFAT](https://github.com/platomav/BIOSUtilities/blob/70c3a0852a6aa2643c8114ea73bc833e3b4cff0d/biosutilities/ami_pfat_extract.py) and [Dell PFS](https://github.com/platomav/BIOSUtilities/blob/70c3a0852a6aa2643c8114ea73bc833e3b4cff0d/biosutilities/dell_pfs_extract.py) formats.
 
-Parse UEFI firmware images to extract modules, NVRAM variables, microcode updates, raw sections, and Secure Boot signature databases.
+Parse UEFI firmware images to extract modules, NVRAM variables, microcode updates, buf sections, and Secure Boot signature databases.
 
 ## Building
 
@@ -93,8 +93,8 @@ Auto-detect and unpack proprietary firmware containers before parsing:
 ```rust
 use bias_loader_uefi::{try_unpack, Uefi};
 
-let raw = std::fs::read("DellBios.cap")?;
-let unpacked = try_unpack(&raw)?;
+let buf = std::fs::read("image.cap")?;
+let unpacked = try_unpack(&buf)?;
 let fw = Uefi::new(&unpacked)?;
 ```
 
@@ -103,8 +103,8 @@ For firmware images containing multiple UEFI images (common with Dell PFS):
 ```rust
 use bias_loader_uefi::UefiMulti;
 
-let raw = std::fs::read("DellBios.cap")?;
-let multi = UefiMulti::new(&raw)?;
+let buf = std::fs::read("image.cap")?;
+let multi = UefiMulti::new(&buf)?;
 
 for (uefi, image) in multi.iter_full() {
     println!("image: {} ({} modules)", image.name(), uefi.count_modules());
@@ -117,9 +117,9 @@ for (uefi, image) in multi.iter_full() {
 use bias_loader_uefi::parsers::Hint;
 
 match Hint::parse(&bytes) {
-    Hint::Pfat => println!("AMI PFAT / BIOS Guard"),
+    Hint::Pfat => println!("AMI PFAT"),
     Hint::Pfs  => println!("Dell PFS"),
-    Hint::Unknown => println!("Standard UEFI or unknown"),
+    Hint::Unknown => println!("Unknown"),
 }
 ```
 
@@ -140,5 +140,5 @@ fw.for_each_var(|var| {
 
 Special thanks to:
 
-- @NikolajSchlej and all UEFITool contributors for [UEFITool](https://github.com/LongSoft/UEFITool)
-- @platomav for [BIOSUtilities](https://github.com/platomav/BIOSUtilities)
+- [@NikolajSchlej](https://github.com/NikolajSchlej) and all UEFITool contributors for [UEFITool](https://github.com/LongSoft/UEFITool)
+- [@platomav](https://github.com/platomav) for [BIOSUtilities](https://github.com/platomav/BIOSUtilities)
