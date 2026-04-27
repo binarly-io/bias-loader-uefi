@@ -42,7 +42,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let uefi_tool_cxxsrc = UEFI_TOOL_CXX_SRC
         .iter()
-        .flat_map(|path| glob(path).unwrap().into_iter())
+        .flat_map(|path| glob(path).unwrap())
+        .filter(|res| {
+            res.as_ref().map_or(true, |path| {
+                !matches!(
+                    path.file_name().and_then(|n| n.to_str()),
+                    Some("fitparser.cpp" | "meparser.cpp")
+                )
+            })
+        })
         .collect::<Result<Vec<_>, _>>()?;
 
     let efixloader_src = EFIXLOADER_SRC

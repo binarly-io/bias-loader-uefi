@@ -8,8 +8,7 @@ def generate(input: str, output: str) -> bool:
     with open(input, "r") as f:
         guids = sorted(
             filter(
-                lambda guidl: not guidl.endswith("Guid")
-                and "ProtocolGuid" not in guidl,
+                lambda line: not line.endswith("Guid") and "ProtocolGuid" not in line,
                 f.read().splitlines(),
             )
         )
@@ -20,8 +19,8 @@ def generate(input: str, output: str) -> bool:
     out.append("#include <string>\n")
     out.append("static std::map<std::string, std::string> g_module_guids = {")
 
-    for guidl in guids:
-        guid, name = guidl.split(",")
+    for line in guids:
+        guid, name = line.split(",")
         if guid in unique_guids:
             continue
         unique_guids.add(guid)

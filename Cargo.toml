@@ -6,7 +6,7 @@ authors = [
   "Fabio Pagani <fabio@binarly.io>",
   "Claudiu-Vlad Ursache <claudiuv@binarly.io>",
 ]
-version = "1.0.0"
+version = "1.0.1"
 edition = "2021"
 categories = ["parsing"]
 description = "A Rust library for parsing and loading UEFI firmware images"
