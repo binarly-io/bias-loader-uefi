@@ -19,8 +19,8 @@ def generate(input: str, output: str) -> bool:
     out.append("#include <string>\n")
     out.append("static std::map<std::string, std::string> g_module_guids = {")
 
-    for l in guids:
-        guid, name = l.split(",")
+    for line in guids:
+        guid, name = line.split(",")
         if guid in unique_guids:
             continue
         unique_guids.add(guid)
